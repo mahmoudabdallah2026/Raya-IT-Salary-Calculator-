@@ -416,7 +416,7 @@
     <!-- ===================== RESULTS COLUMN ===================== -->
     <div class="results">
       <div class="headline">
-        <div class="cap" id="hlCap">Monthly net take-home</div>
+        <div class="cap" id="hlCap">Monthly net</div>
         <div class="big"><span id="hlBig">—</span><small>EGP / mo</small></div>
         <div class="flip">
           <div>Annual net<b id="hlAnnualNet">—</b></div>
@@ -450,7 +450,7 @@
 
 <div class="mobar" id="mobar" aria-live="polite">
   <div>
-    <div class="mb-cap" id="mbCap">Net take-home</div>
+    <div class="mb-cap" id="mbCap">Net</div>
     <div class="mb-val"><span id="mbVal">—</span><small>EGP / mo</small></div>
   </div>
   <button type="button" id="mbGo">Breakdown ↓</button>
@@ -636,7 +636,7 @@
       $("#hlBig").textContent=fmt(r.gross);
       $(".big small").textContent="EGP / mo";
     } else {
-      $("#hlCap").textContent="Monthly net take-home";
+      $("#hlCap").textContent="Monthly net";
       $("#hlBig").textContent=fmt(r.net);
       $(".big small").textContent="EGP / mo";
     }
@@ -669,7 +669,7 @@
     t+='<tr><td class="lab neg">Income tax<small>on '+fmt(r.taxable)+' taxable / yr</small></td><td class="v neg">−'+fmt(r.tax)+'</td></tr>';
     if(r.health>0) t+='<tr><td class="lab neg">Health insurance</td><td class="v neg">−'+fmt(r.health)+'</td></tr>';
     if(r.martyrs>0) t+='<tr><td class="lab neg">Martyrs &amp; Victims Fund</td><td class="v neg">−'+fmt(r.martyrs)+'</td></tr>';
-    t+='<tr class="total"><td class="lab pos">Net take-home <span class="tag net">NET</span></td><td class="v pos">'+fmt(r.net)+'</td></tr>';
+    t+='<tr class="total"><td class="lab pos">Net <span class="tag net">NET</span></td><td class="v pos">'+fmt(r.net)+'</td></tr>';
     if(r.isDir){
       t+='<tr class="tagrow"><td class="lab" style="color:var(--muted)">Employer social insurance <span class="tag er">COST</span><small>self-borne under director registration</small></td><td class="v" style="color:var(--employer)">0</td></tr>';
     } else {
@@ -726,7 +726,7 @@
 
     // stash for copy
     // mobile sticky result bar
-    $("#mbCap").textContent = mode==="n2g" ? "Required gross" : "Net take-home";
+    $("#mbCap").textContent = mode==="n2g" ? "Required gross" : "Net";
     $("#mbVal").textContent = fmt(mode==="n2g" ? r.gross : r.net);
 
     window.__summary={mode:mode, grossMo:r.gross, netMo:r.net, empSI:r.empSImo, tax:r.tax, health:r.health, martyrs:r.martyrs,
