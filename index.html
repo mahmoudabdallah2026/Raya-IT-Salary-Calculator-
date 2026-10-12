@@ -195,7 +195,97 @@
   footer .disc h3{font-size:12px;color:var(--navy);letter-spacing:.04em;margin-bottom:6px;font-family:"Space Grotesk"}
   footer .disc a{color:var(--steel)}
   .kbd{font-family:"IBM Plex Mono";background:var(--blue-050);border:1px solid var(--blue-100);border-radius:5px;padding:1px 5px;font-size:11px}
-  @media print{header.masthead::after{display:none}.seg,.actions,.addbtn,.adv-toggle{display:none}.results{position:static}}
+  /* ---------- Responsive fixes: nothing may force the page wider than the screen ---------- */
+  input,select,button{min-width:0;max-width:100%}
+  .inputs,.results{min-width:0}
+  .amount-in input{min-width:0;flex:1 1 auto}
+  .velem{grid-template-columns:minmax(0,1fr) 118px 92px auto}
+  .row2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .brkbrackets td.r{white-space:normal}
+
+  /* Mobile result bar (hidden on desktop) */
+  .mobar{display:none}
+
+  @media(max-width:900px){
+    .grid{grid-template-columns:minmax(0,1fr)}
+    .results{position:static}
+    .mobar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      position:fixed;left:0;right:0;bottom:0;z-index:50;
+      background:var(--navy-900);color:#fff;border-top:1px solid rgba(255,255,255,.12);
+      padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -8px 24px -12px rgba(15,29,50,.45);
+      transition:transform .2s ease;
+    }
+    .mobar.hide{transform:translateY(110%)}
+    .mobar .mb-cap{font-size:11px;color:var(--blue-100);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+    .mobar .mb-val{font-family:"Space Grotesk";font-weight:700;font-size:22px;line-height:1.1}
+    .mobar .mb-val small{font-size:12px;color:var(--blue-100);font-weight:500;margin-left:4px}
+    .mobar button{flex:none;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;
+      font-weight:600;font-size:13px;padding:10px 14px;border-radius:10px;cursor:pointer}
+    body{padding-bottom:76px}
+  }
+
+  @media(max-width:600px){
+    body{font-size:14.5px}
+    header.masthead{padding:14px 16px}
+    .mast-inner{gap:10px}
+    .brand{gap:10px}
+    .logo-chip{padding:6px 10px;border-radius:8px}
+    .brand .logo{height:22px}
+    .brand .tool{padding-left:10px}
+    .brand .tool .k{font-size:14px}
+    .brand .tool .s{font-size:11px}
+    .mast-meta{width:100%;gap:10px;flex-wrap:wrap;font-size:11.5px}
+
+    .wrap{padding:16px}
+    .grid{gap:16px}
+    .card+.card{margin-top:14px}
+    .card .hd{padding:13px 14px;flex-wrap:wrap;row-gap:2px}
+    .card .hd .sub{margin-left:0;width:100%}
+    .card .hd .n ~ .sub{padding-left:36px}
+    .card .bd{padding:14px}
+
+    .seg button{padding:9px 6px;font-size:13px;text-align:center}
+    .seg button .d{font-size:10.5px;line-height:1.3}
+
+    .row2{grid-template-columns:minmax(0,1fr);gap:14px}
+    /* 16px stops iOS Safari from zooming into fields on focus */
+    input.txt,select.txt,.velem input.nm,.velem .amt input,.velem select,.mini input{font-size:16px}
+    .amount-in input{font-size:20px;padding:12px 10px}
+    .amount-in .cur{padding:0 10px}
+    .amount-in .per button{padding:0 12px;font-size:13px}
+
+    .velem{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px;gap:8px}
+    .velem input.nm{grid-column:1/-1}
+    .velem .del{width:44px;height:42px;font-size:18px}
+    .velem input.nm,.velem .amt input,.velem select{padding:10px}
+    .flags{gap:16px}
+    .flags label{font-size:13px}
+    .flags input{width:18px;height:18px}
+
+    .opt{gap:12px}
+    .opt .meta .t{font-size:14px}
+    .switch{width:46px;height:27px}
+    .switch span::before{height:21px;width:21px}
+    .switch input:checked+span::before{transform:translateX(19px)}
+
+    .headline{padding:18px}
+    .headline .big{font-size:34px}
+    .headline .flip b{font-size:15px}
+    .wf-row{gap:8px}
+    .wf-row .wl{width:118px;font-size:12px}
+    .wf-row .wv{width:64px;font-size:12.5px}
+    .brk td{font-size:13px}
+    .brkbrackets td{padding:6px 10px;font-size:11.5px}
+    .tc-cell{padding:10px}
+    .tc-cell .v{font-size:18px}
+    .actions button{padding:13px 8px}
+
+    footer.foot{padding:0 16px}
+  }
+
+  @media print{header.masthead::after{display:none}.seg,.actions,.addbtn,.adv-toggle,.mobar{display:none!important}.results{position:static}body{padding-bottom:0}}
 </style>
 </head>
 <body>
@@ -294,7 +384,7 @@
             <div class="opt">
               <div class="meta"><div class="t">Martyrs &amp; Victims Fund</div>
                 <div class="d">0.05% of gross salary (Law 4/2021)</div></div>
-              <div class="ctrl"><label class="switch"><input type="checkbox" id="optMartyrs"><span></span></label></div>
+              <div class="ctrl"><label class="switch"><input type="checkbox" id="optMartyrs" checked><span></span></label></div>
             </div>
             <div class="opt">
               <div class="meta"><div class="t">Deduct social insurance before tax</div>
@@ -358,14 +448,23 @@
   </div>
 </div>
 
+<div class="mobar" id="mobar" aria-live="polite">
+  <div>
+    <div class="mb-cap" id="mbCap">Net take-home</div>
+    <div class="mb-val"><span id="mbVal">—</span><small>EGP / mo</small></div>
+  </div>
+  <button type="button" id="mbGo">Breakdown ↓</button>
+</div>
+
 <footer class="foot">
   <div class="disc">
     <h3>METHODOLOGY &amp; ASSUMPTIONS</h3>
     Income tax uses Egypt's seven progressive brackets under Income Tax Law No. 91/2005 as amended
     (0% up to EGP 40,000 → 27.5% above EGP 1,200,000) with a EGP 20,000 annual personal exemption, applied to salary
     income after deducting employee social-insurance contributions. The <b>high-earner bracket-melting</b> rule is applied:
-    the lower brackets are progressively withdrawn as annual taxable income passes EGP 600k, 700k, 800k, 900k and 1,000k,
-    leaving only the top two brackets above EGP 1,000,000. Social insurance follows Law No. 148/2019 — employee 11%,
+    the lower brackets are progressively withdrawn as annual taxable income passes EGP 600k, 700k, 800k and 900k,
+    leaving only the 25% and 27.5% brackets above EGP 1,200,000 (Law 7/2024). Annual net income is rounded down to the
+    nearest EGP 10 before the brackets are applied. Social insurance follows Law No. 148/2019 — employee 11%,
     employer 18.75% (or 21% flat for directors on the commercial register) on the insurable wage, floored at EGP 2,700
     and capped at EGP 16,700 per month from 1 January 2026. Comprehensive health insurance, the Martyrs Fund and the
     exact insurable base can vary by payroll practice, so they are configurable above.
@@ -398,13 +497,17 @@
         {upTo:200000,rate:.20},{upTo:400000,rate:.225},{upTo:1200000,rate:.25},
         {upTo:Infinity,rate:.275}
       ],
-      melt:[{upTo:600000,k:0},{upTo:700000,k:1},{upTo:800000,k:2},{upTo:900000,k:3},{upTo:1000000,k:4},{upTo:Infinity,k:5}]
+      // Law 7/2024: lower brackets are withdrawn above 600k / 700k / 800k / 900k; above 1,200,000 only 25% + 27.5% remain
+      melt:[{upTo:600000,k:0},{upTo:700000,k:1},{upTo:800000,k:2},{upTo:900000,k:3},{upTo:1200000,k:4},{upTo:Infinity,k:5}]
     };
   }
   var BLABEL=["0%","10%","15%","20%","22.5%","25%","27.5%"];
 
   function firstK(T,c){ for(var i=0;i<c.melt.length;i++){ if(T<=c.melt[i].upTo) return c.melt[i].k; } return 5; }
+  // Art. 8 as amended by Law 7/2024: annual net income is rounded DOWN to the nearest 10 EGP
+  function round10(T){ return Math.max(0, Math.floor(T/10)*10); }
   function taxDetail(T,c){
+    T=round10(T);
     var out={tax:0,rows:[]}; if(T<=0) return out;
     var k=firstK(T,c);
     for(var i=k;i<c.brackets.length;i++){
@@ -466,7 +569,7 @@
     var annualCash=grossMo*12;
     var annualSI=empSImo*12;
     var deductSI=$("#optSIDeduct").checked?annualSI:0;
-    var T=Math.max(0, annualCash - deductSI - c.exempt);
+    var T=round10(annualCash - deductSI - c.exempt);
     var td=taxDetail(T,c);
     var taxMo=td.tax/12;
     var healthMo=0;
@@ -622,7 +725,11 @@
     $("#tcGrid").innerHTML=tc;
 
     // stash for copy
-    window.__summary={mode:mode, grossMo:r.gross, netMo:r.net, empSI:r.empSImo, tax:r.tax,
+    // mobile sticky result bar
+    $("#mbCap").textContent = mode==="n2g" ? "Required gross" : "Net take-home";
+    $("#mbVal").textContent = fmt(mode==="n2g" ? r.gross : r.net);
+
+    window.__summary={mode:mode, grossMo:r.gross, netMo:r.net, empSI:r.empSImo, tax:r.tax, health:r.health, martyrs:r.martyrs,
       employerSI:r.employerSI, annualNet:r.net*12, totalCashGross:totalCashGross, totalCashNet:totalCashNet, eff:eff};
   }
 
@@ -658,6 +765,8 @@
       "Monthly gross: EGP "+fmt(s.grossMo)+"\n"+
       "Employee social insurance: −EGP "+fmt(s.empSI)+"\n"+
       "Income tax: −EGP "+fmt(s.tax)+"\n"+
+      (s.health>0?"Health insurance: −EGP "+fmt(s.health)+"\n":"")+
+      (s.martyrs>0?"Martyrs & Victims Fund: −EGP "+fmt(s.martyrs)+"\n":"")+
       "Monthly NET: EGP "+fmt(s.netMo)+"  ("+fmt2(s.eff)+"% total deductions)\n"+
       "Annual net: EGP "+fmt(s.annualNet)+"\n"+
       "Employer social insurance: +EGP "+fmt(s.employerSI)+"/mo\n"+
@@ -666,6 +775,14 @@
       var b=$("#btnCopy"); var o=b.innerHTML; b.innerHTML="✓ Copied"; setTimeout(function(){b.innerHTML=o;},1400);
     });
   });
+
+  // mobile bar: jump to results, and hide the bar while the results headline is on screen
+  $("#mbGo").addEventListener("click",function(){ $(".results").scrollIntoView({behavior:"smooth",block:"start"}); });
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(en){
+      $("#mobar").classList.toggle("hide", en[0].isIntersecting);
+    },{threshold:0.25}).observe($(".headline"));
+  }
 
   // seed with a realistic example
   addElem("Monthly allowance",5000,"month",true,false);

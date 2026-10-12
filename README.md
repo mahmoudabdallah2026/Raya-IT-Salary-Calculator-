@@ -18,12 +18,14 @@ A browser-based gross ⇄ net salary calculator built on the **current Egyptian 
 |---|---|
 | Income-tax brackets | 7 progressive: 0% ≤ EGP 40,000 · 10% · 15% · 20% · 22.5% · 25% · 27.5% > EGP 1,200,000 |
 | Personal exemption | EGP 20,000 / year |
-| High-earner "bracket melting" | Lower brackets withdrawn as annual taxable income passes 600k / 700k / 800k / 900k / 1,000k |
+| High-earner "bracket melting" | Lower brackets withdrawn as annual taxable income passes 600k / 700k / 800k / 900k; above 1,200,000 only 25% + 27.5% apply (Law 7/2024) |
+| Rounding | Annual net taxable income rounded down to the nearest EGP 10 |
 | Social insurance — employee | 11% of the insurable wage |
 | Social insurance — employer | 18.75% of the insurable wage |
 | Director on commercial register | 21% flat on the max insurable wage (self-borne) |
 | Insurable wage floor / cap | EGP 2,700 / EGP 16,700 per month |
-| Optional | Comprehensive health insurance, Martyrs & Victims Fund (0.05%) |
+| Martyrs & Victims Fund | 0.05% of gross — on by default (switchable) |
+| Optional | Comprehensive health insurance |
 
 Income tax is applied to salary income **after** deducting employee social-insurance contributions and the personal exemption. All rates and thresholds are editable in the **Advanced** panel to model a future indexation or a different payroll convention.
 
